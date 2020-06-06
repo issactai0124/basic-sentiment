@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="home">
+    <h1>Testing page</h1>
+    <form action = "/" method = "post">
+         <p>Enter string of max length 48:</p>
+         <p><input type = "text" name = "query" /></p>
+         <p><input type = "submit" value = "submit" /></p>
+         {% if feedback %}
+         <p>Result:</p>
+         <p>Sentiment: {{ feedback.result }}, probability: {{ feedback.accuracy }}.</p>
+         <p>Used text: {{ feedback.text }}.</p>
+         {% endif %}
+    </form>
+</div>
+{% endblock %}
