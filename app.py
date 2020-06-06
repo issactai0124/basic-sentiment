@@ -1,5 +1,6 @@
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, render_template
 from model import predict
+import json
 
 # create the flask object
 app = Flask(__name__)
@@ -23,10 +24,10 @@ def number(number):
 def run():
     query = request.args.get('query')
     if query == None:
-        return jsonify({"error": "Please specify query!"})
+        return json.dumps({"error": "Please specify query!"})
     else:
         prediction = predict.predict(query)
-    return jsonify(prediction)
+    return json.dumps(prediction)
 
 if __name__ == "__main__":
     app.run(threaded=True, port=5000)
