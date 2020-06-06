@@ -5,17 +5,33 @@ The NN model is implemented by [Tensorflow 2.2.0](https://www.tensorflow.org/). 
 
 ## Demonstration
 This application is hosted at https://basic-sentiment.herokuapp.com/.
-A pre-trained tokenizer and model are first instantiated.
-User can input a short sentence and hit the submit button. A few steps will be carried to obtain the corresponding result on sentiment.
+The user can query the sentiment of a short sentence by the URL. For example, the user inputs "Stay healthy, strong and safe!" on the input form.
+
+![image](https://user-images.githubusercontent.com/59948939/83946419-5628a180-a843-11ea-9801-6c9789617276.png)
+
+Upon hitting the The result (sentiment, probability and the texts used for finding sentiment) will then be displayed.
+
+![image](https://user-images.githubusercontent.com/59948939/83947908-8aed2680-a84c-11ea-95a6-8a8e2a3ab142.png)
+
+Furthermore, the end-point `\run` under a simple REST Architecture is available.
+The same query can be made by the following:
+```sh
+https://basic-sentiment.herokuapp.com/run?query=Stay%20healthy,%20strong%20and%20safe!
+```
+The corresponding result in JSON format:
+```sh
+{"accuracy":"0.94","result":"positive","text":"stay healthy strong and safe"}
+```
+
+## Prediction Details
+A tokenizer and a prediction model are first instantiated. They are loaded with the respective pre-trained model.
+The following procedure is taken to obtain the result.
 - pre-processing (lemmatized, turned to lower case and with punctuation removed).
 - tokenization (using the loaded tokenizer).
 - pre-padding (or truncation) to get a vector of length 48.
 - prediction (using the loaded model).
-The result (sentiment with probability) will then be displayed.
 
-Furthermore, an end-point `\run` under a simple REST Architecture is available.
-
-## NN Model
+Summary of the prediction model:
 ```sh
 _________________________________________________________________
 Layer (type)                 Output Shape              Param #   
@@ -40,8 +56,7 @@ Non-trainable params: 0
 ```
 
 ## Getting Started
-###Requirements
-Python 3.8
+Python 3.8 is used to run the application.
 
 ### Install Dependencies
 ```sh
