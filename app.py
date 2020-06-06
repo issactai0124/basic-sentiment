@@ -26,8 +26,6 @@ def run():
         return jsonify({"error": "Please specify query!"})
     else:
         prediction = predict.predict(query)
-    print("query = ", query)
-    print("prediction = ", prediction)
     return jsonify(prediction)
 
 if __name__ == "__main__":

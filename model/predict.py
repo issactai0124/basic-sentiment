@@ -25,11 +25,11 @@ lemmatizer = WordNetLemmatizer()
 def give_sig(scores: np.ndarray, used_text: str) -> Dict[str, Union[str, float]]:
     max_prob_pos = np.array(scores).argmax()
     if(max_prob_pos == 2):
-    	return {'text': used_text, 'result': 'neutral', 'accuracy': scores[0][2]}
+    	return {'text': used_text, 'result': 'neutral', 'accuracy': f"{scores[0][2]:.2f}"}
     elif(max_prob_pos > 2):
-    	return {'text': used_text, 'result': 'positive', 'accuracy': scores[0][3] + scores[0][4]}
+    	return {'text': used_text, 'result': 'positive', 'accuracy': f"{scores[0][3] + scores[0][4]:.2f}"}
     else:
-    	return {'text': used_text, 'result': 'negative', 'accuracy': scores[0][0] + scores[0][1]}
+    	return {'text': used_text, 'result': 'negative', 'accuracy': f"{scores[0][0] + scores[0][1]:.2f}"}
 
 def predict(sentence: str) -> Dict[str, Union[str, float]]:
     sentence = lemmatizer.lemmatize(sentence.lower()).translate(str.maketrans('', '', string.punctuation)).split()
